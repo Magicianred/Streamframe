@@ -1,0 +1,17 @@
+.mainbody{
+    background-color: black;
+}
+
+.cur{
+    font-family: 'Satisfy', cursive;
+}
+
+.bigtext{
+    font-weight: 200;
+    font-size: 40mm;
+}
+
+#filterText{
+    color: white;
+    font-size: 9mm;
+}
