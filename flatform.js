@@ -5,6 +5,15 @@
 
 const e = React.createElement;
 
+const taskList = ["test"];
+
+import { Text, View } from "react-native";
+
+const Country = ({ name }) => (
+  <View>
+    <Text>{name}</Text>
+  </View>
+);
 class LikeButton extends React.Component {
   constructor(props) {
     super(props);
