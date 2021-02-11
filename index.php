@@ -22,6 +22,7 @@ $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
         <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
         <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
         <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/list.pagination.js/0.1.1/list.pagination.min.js"></script>
         
     </head>
     <body class="mainbody">
@@ -65,13 +66,13 @@ $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
             </div>
             <div class="col-md-3" id="sb">
-
+                <button id="confirmAddParentTask">Add Nested Task</button>
             </div>
             <div class="col-md-2" id="sb">
-                <button id="confirmAddTask">Add Task</button>
+                
             </div>
             <div class="col-md-3" id="sb">
-                
+                <button id="confirmAddTask">Add Task</button>
             </div>
             
         </div>
@@ -85,11 +86,6 @@ $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
             </div>
             <form id="modalForm" method="POST">
                 <div class="modal-body">
-                    
-                        <label>Parent Task(Optional)</label>
-                        <br>
-                        <input type="text" name="nameParentTask" id="ParentTask" maxlength="400">
-                        <br>
                         <label>Task</label>
                         <br>
                         <input type="text" name="nameTaskName" id="TaskName" maxlength="400" required>
@@ -101,15 +97,46 @@ $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
             </form> 
             <?php
                 if (isset($_POST['submitNewTask'])){
-                    $parentTaskName = $_POST["nameParentTask"];
+                    
                     $taskName = $_POST["nameTaskName"];
 
-                    $sql = "INSERT INTO tasks (taskName,parentTask,taskStatus) VALUES ('$taskName','$parentTaskName',0)";
+                    $sql = "INSERT INTO tasks (taskName,taskStatus) VALUES ('$taskName',0)";
                     mysqli_query($conn,$sql);
                 }
             ?>
           </div>
         </div>
+
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Nested Task</h2>
+                <span class="close">&times;</span>
+              
+            </div>
+            <form id="modalParentForm" method="POST">
+                <div class="modal-body">
+                    <label>Parent Task</label>
+                    <br>
+                    <input type="text" name="nameParentTaskName" id="ParentTaskName" maxlength="400">
+                    <br>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" id="addParentTaskToList" value="Add" name="submitNewParentTask">
+                </div>
+            </form> 
+            <?php
+                if (isset($_POST['submitNewParentTask'])){
+                    
+                    $taskName = $_POST["nameParentTaskName"];
+
+                    $sql = "INSERT INTO tasks (taskName,taskStatus) VALUES ('$taskName',0)";
+                    mysqli_query($conn,$sql);
+                }
+            ?>
+          </div>
+        </div>
+
         <div class="row">
             <div class="col-md-2">
 
@@ -128,11 +155,15 @@ $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
                         <tr>
                             <th scope="row">1</th>
                             <td>fuck</td>
-                            <td><input type="checkbox" name="taskCheck" id="checkValue" /><label id="checkStatus">In Progress</label></td>
+                            <td><input type="checkbox" name="taskCheck" id="checkValue" />&nbsp&nbsp&nbsp&nbsp&nbsp<label id="checkStatus">In Progress</label></td>
                         </tr>
                     </tbody>
                     
                 </table>
+            </div>
+
+            <div class="col-md-2">
+
             </div>
 
             

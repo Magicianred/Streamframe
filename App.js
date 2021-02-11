@@ -1,9 +1,13 @@
 var modal = document.getElementById("myModal");
 var btn = document.getElementById("confirmAddTask");
-
+var btn2 = document.getElementById("confirmAddParentTask");
 var span = document.getElementsByClassName("close")[0];
 
 btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+btn2.onclick = function() {
   modal.style.display = "block";
 }
 
@@ -34,7 +38,7 @@ checkboxForStatus.addEventListener('change', function() {
     }
 });
 
-var checkParentTask = document.querySelector("#ParentTask");
+var checkParentTask = document.querySelector("#nameParentTaskName");
 var checkTaskName = document.querySelector("#TaskName");
 
 var checkForm = document.querySelector("#modalForm");
@@ -42,6 +46,16 @@ var checkForm = document.querySelector("#modalForm");
 checkForm.addEventListener('submit', function(event){
   
   if (checkTaskName !== null){
+    return true;   
+  } 
+  event.preventDefault();
+});
+
+var checkParentForm = document.querySelector("#modalParentForm");
+
+checkParentForm.addEventListener('submit', function(event){
+  
+  if (checkParentTask !== null){
     return true;   
   } 
   event.preventDefault();

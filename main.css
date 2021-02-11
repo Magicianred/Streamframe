@@ -34,6 +34,10 @@
     width: 100%;
 }
 
+#confirmAddParentTask{
+  width: 100%;
+}
+
 #ParentTask{
     width: 100%;
 }
@@ -44,6 +48,10 @@
 
 #addTaskToList{
     width: 100%;
+}
+
+#addParentTaskToList{
+  width: 100%;
 }
 
 
