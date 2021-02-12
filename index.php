@@ -100,7 +100,7 @@ $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
                     
                     $taskName = $_POST["nameTaskName"];
 
-                    $sql = "INSERT INTO tasks (taskName,taskStatus) VALUES ('$taskName',0)";
+                    $sql = "INSERT INTO tasks (taskName,taskStatus) VALUES ('$taskName','In Progress')";
                     mysqli_query($conn,$sql);
                 }
             ?>
@@ -128,9 +128,9 @@ $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
             <?php
                 if (isset($_POST['submitNewParentTask'])){
                     
-                    $taskName = $_POST["nameParentTaskName"];
+                    $taskParentName = $_POST["nameParentTaskName"];
 
-                    $sql = "INSERT INTO tasks (taskName,taskStatus) VALUES ('$taskName',0)";
+                    $sql = "INSERT INTO tasks (taskName,taskStatus) VALUES ('$taskParentName','In Progress')";
                     mysqli_query($conn,$sql);
                 }
             ?>
@@ -152,11 +152,65 @@ $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
                         </tr>
                     </thead>
                     <tbody>
+                        
+                        <?php
+                        $sql2 = "SELECT * FROM tasks ";
+                        
+                        if (isset($_POST["deleteRecord"])){
+                            $id = $_POST["id"];
+                            $sql3 = "DELETE FROM tasks WHERE taskId = '$id'";
+                            mysqli_query($conn,$sql3);
+                        }
+                
+                        if (isset($_POST["checkRecord"])){
+                            $checkid = $_POST["checkButtonId"];
+                            $sql5 = "UPDATE tasks SET taskStatus='Done' WHERE taskId='$checkid'";
+                            mysqli_query($conn,$sql5);
+                        }
+
+                        if (isset($_POST["IPRecord"])){
+                            $checkid2 = $_POST["IPButtonId"];
+                            $sql6 = "UPDATE tasks SET taskStatus='In Progress' WHERE taskId='$checkid2'";
+                            mysqli_query($conn,$sql6);
+                        }
+                        
+
+                        $result = $conn -> query($sql2);
+                        if ($result->num_rows >0){
+                            while($row=$result -> fetch_assoc()){?>
+
+                        
                         <tr>
-                            <th scope="row">1</th>
-                            <td>fuck</td>
-                            <td><input type="checkbox" name="taskCheck" id="checkValue" />&nbsp&nbsp&nbsp&nbsp&nbsp<label id="checkStatus">In Progress</label></td>
+                            
+                            <td><?php echo $row['taskId']?></td>
+                            <td><?php echo $row['taskName']?></td>
+                            <td><label name="checkStatus"><?php echo $row['taskStatus']?></label></td>
+                            <td>
+                            
+                                <form method="POST">
+                                    <input type="hidden" name="checkButtonId" value="<?php echo $row['taskId']?>">
+                                    <input type="submit" name="checkRecord" value="Done">
+                                </form>
+                            </td>
+                            <td>
+                            
+                                <form method="POST">
+                                    <input type="hidden" name="IPButtonId" value="<?php echo $row['taskId']?>">
+                                    <input type="submit" name="IPRecord" value="In Progress">
+                                </form>
+                            </td>
+                            <td>
+                            
+                                <form method="POST">
+                                    <input type="hidden" name="id" value="<?php echo $row['taskId']?>">
+                                    <input type="submit" name="deleteRecord" value="Delete">
+                                </form>
+                            </td>
                         </tr>
+                        <?php
+                        }}
+                        ?>
+                        
                     </tbody>
                     
                 </table>
@@ -167,9 +221,11 @@ $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
             </div>
 
             
-       
+        
             
         </div>
+
+    
 
     <script src="App.js">
 
