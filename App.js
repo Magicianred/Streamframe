@@ -1,4 +1,5 @@
 var modal = document.getElementById("myModal");
+var modal2 = document.getElementById("myParentModal");
 var btn = document.getElementById("confirmAddTask");
 var btn2 = document.getElementById("confirmAddParentTask");
 var span = document.getElementsByClassName("close")[0];
@@ -8,11 +9,15 @@ btn.onclick = function() {
 }
 
 btn2.onclick = function() {
-  modal.style.display = "block";
+  modal2.style.display = "block";
 }
 
 span.onclick = function() {
   modal.style.display = "none";
+}
+
+span.onclick = function() {
+  modal2.style.display = "none";
 }
 
 window.onclick = function(event) {
@@ -21,89 +26,23 @@ window.onclick = function(event) {
   }
 }
 
+window.onclick = function(event) {
+  if (event.target == modal2) {
+    modal2.style.display = "none";
+  }
+}
+
+
+
 const cbStatus = document.getElementById('checkStatus');
 var checkingBox=document.querySelector('#checkValue');
 // console.log(checkingBox.checked);
 var checkingStatus=document.querySelectorAll("input[name=checkStatus]");
 
 var checkboxForStatus = document.querySelectorAll("input[name=taskCheck]");
-// var formData = new FormData();
-var testForm = document.getElementById("FormExam");
-checkboxForStatus.forEach(
-  function(item){
-    item.addEventListener('change', function() {
-      // formData.append('id',item.dataset.id);
-      
 
-      if (this.checked ==1){
 
-        // document.forms["testForm"].submit();
-          // fetch('StatusUpdate.php',{
-          //   method:'POST',
-          //   body:JSON.stringify(formData),
-          // }).then(data => {
-          //   console.log(data.text());
-          // }).catch(error=> {
-          //   console.log(error)
-          // });
-          checkingStatus.innerHTML = "Done";
-          console.log(checkingStatus.innerHTML);
-      
-      } else {
-        // fetch('StatusUpdate.php',{
-        //   method:'POST',
-        //   body:JSON.stringify(formData)
-        // }).then(data => {
-        //   console.log(data.text());
-        // }).catch(error=> {
-        //   console.log(error)
-        // });
-        //   // console.log("Checkbox is not checked..");
-          checkingStatus.innerHTML = "In Progress";
-          console.log(checkingStatus.innerHTML);
-      }
-  });
-  }
-)
-
-checkboxForStatus.forEach(
-  function(item){
-    item.addEventListener('change', function() {
-      // formData.append('id',item.dataset.id);
-      
-
-      if (this.checked ==1){
-
-        // document.forms["testForm"].submit();
-          // fetch('StatusUpdate.php',{
-          //   method:'POST',
-          //   body:JSON.stringify(formData),
-          // }).then(data => {
-          //   console.log(data.text());
-          // }).catch(error=> {
-          //   console.log(error)
-          // });
-          checkingStatus.innerHTML = "Done";
-          console.log(checkingStatus.innerHTML);
-      
-      } else {
-        // fetch('StatusUpdate.php',{
-        //   method:'POST',
-        //   body:JSON.stringify(formData)
-        // }).then(data => {
-        //   console.log(data.text());
-        // }).catch(error=> {
-        //   console.log(error)
-        // });
-        //   // console.log("Checkbox is not checked..");
-          checkingStatus.innerHTML = "In Progress";
-          console.log(checkingStatus.innerHTML);
-      }
-  });
-  }
-)
-
-var checkParentTask = document.querySelector("#nameParentTaskName");
+var checkParentTask = document.querySelector("#ParentTaskName");
 var checkTaskName = document.querySelector("#TaskName");
 
 var checkForm = document.querySelector("#modalForm");

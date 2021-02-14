@@ -26,8 +26,34 @@
     color: aliceblue;
 }
 
+#pb{
+  background-color: blue;
+  color: whitesmoke;
+}
+
+#labelstatusbar{
+  background-color: darkmagenta;
+  color: white;
+}
+
 #newTask{
-    width: 100%;
+  width: 100%;
+}
+
+#ParentTaskName{
+  width: 100%;
+}
+
+#subTask1{
+  width: 100%;
+}
+
+#subTask2{
+  width: 100%;
+}
+
+#subTask3{
+  width: 100%;
 }
 
 #confirmAddTask{
@@ -54,6 +80,17 @@
   width: 100%;
 }
 
+li.nonu {
+  list-style-type: none;
+}
+
+.lispace {
+  padding: 10%;
+}
+
+.lispace2 {
+  padding-top: 14%;
+}
 
 .modal {
   display: none; /* Hidden by default */
